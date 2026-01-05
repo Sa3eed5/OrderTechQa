@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ordertech_configration,access.ordertech.configration,model_ordertech_configration,base.group_system,1,1,1,1

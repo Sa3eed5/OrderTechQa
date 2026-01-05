@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='email']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//notebook" position="inside">
+                <page string="OrderTech Information" invisible="not customer_rank">
+                    <group>
+                        <group>
+                            <field name="ordertech_customerId" string="OrderTech CustomerId" readonly="1"/>
+                            <field name="ordertech_tenant_branchId" string="OrderTech BranchId" readonly="1"/>
+                            <field name="ordertech_tenantId" string="OrderTech TenantId" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_sync_customers_to_ordertech" model="ir.actions.server">
+        <field name="name">Sync To orderTech</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_sync_customer_to_ordertech()</field>
+    </record>
+</odoo>

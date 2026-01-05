@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_attribute_view_form_inherit" model="ir.ui.view">
+        <field name="name">product.attribute.view.form.inherit</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='create_variant']" position="after">
+               <field name="company_id"/>
+               <field name="is_addons"/>
+               <field name="limit_min" invisible="not is_addons"/>
+               <field name="limit_max" invisible="not is_addons"/>
+               <field name="is_required" invisible="not is_addons"/>
+               <field name="ordertech_addons_groupId" readonly="1" invisible="not is_addons"/>
+           </xpath>
+        </field>
+    </record>
+    <record id="action_sync_groups_to_ordertech" model="ir.actions.server">
+        <field name="name">Sync To orderTech</field>
+        <field name="model_id" ref="product.model_product_attribute"/>
+        <field name="binding_model_id" ref="product.model_product_attribute"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_sync_groups_to_ordertech()</field>
+    </record>
+</odoo>

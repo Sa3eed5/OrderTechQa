@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ordertech_menu_category_action" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">pos.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('ordertech_categId','!=',False)]</field>
+        <field name="context">{'create':False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Synced Category Found!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="ordertech_menu_menu_root"
+              name="Menu"
+              sequence="3"
+              parent="ordertech_root"/>
+    <menuitem id="ordertech_menu_category_menu"
+              name="Categories"
+              sequence="1"
+              parent="ordertech_menu_menu_root"
+              action="ordertech_menu_category_action"/>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="default_ordertech_instance" model="ordertech.configration">
+            <field name="name">OrderTech Integration</field>
+            <field name="url">https://ordertech.ai</field>
+        </record>
+    </data>
+</odoo>

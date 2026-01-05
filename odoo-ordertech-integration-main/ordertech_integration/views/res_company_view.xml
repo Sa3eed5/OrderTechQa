@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">view.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet" position="before">
+                <header>
+                    <button name="sync_ordertech_restaurant" string="Sync Ordertech" type="object"
+                            class="btn btn-secondary"
+                            help="get restaurant information from ordertech account"
+                            invisible="ordertech_tenantId or is_branch"/>
+                </header>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group/div/field[@name='street']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group/div/field[@name='street2']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group/div/field[@name='city']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group/div/field[@name='state_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group/div/field[@name='zip']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group[2]/field[@name='phone']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']/group/group[2]/field[@name='email']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_info']" position="after">
+                <page string="OrderTech Information" name="ordertech_info">
+                    <group>
+                        <group>
+                            <field name="is_restaurant" invisible="is_branch"/>
+                            <field name="opening_time" widget="float_time"/>
+                            <field name="closing_time" widget="float_time"/>
+                            <field name="ordertech_tenantId" string="OrderTech TenantId" readonly="1"/>
+                        </group>
+                        <group invisible="not is_branch">
+                            <field name="is_branch"/>
+                            <field name="notes" required="is_branch"/>
+                            <field name="delivery_radius_km" required="is_branch"/>
+                            <field name="ordertech_tenant_branchId" string="OrderTech BranchId" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_sync_branches_to_ordertech" model="ir.actions.server">
+        <field name="name">Sync To orderTech</field>
+        <field name="model_id" ref="base.model_res_company"/>
+        <field name="binding_model_id" ref="base.model_res_company"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_sync_branch_to_ordertech()</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ordertech_addons_item_action" model="ir.actions.act_window">
+         <field name="name">Add-on Item</field>
+        <field name="res_model">product.attribute.value</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('ordertech_addons_itemId','!=',False)]</field>
+        <field name="context">{'create':False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Synced Add-ons Item Found!
+            </p>
+        </field>
+    </record>
+
+    <record id="ordertech_addons_group_action" model="ir.actions.act_window">
+         <field name="name">Add-on Group</field>
+        <field name="res_model">product.attribute</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('ordertech_addons_groupId','!=',False)]</field>
+        <field name="context">{'create':False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Synced Add-ons Group Found!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="ordertech_addons_group_root_menu"
+              name="Add-ons"
+              sequence="3"
+              parent="ordertech_integration.ordertech_menu_menu_root"/>
+    <menuitem id="ordertech_addons_group_menu"
+              name="Groups"
+              sequence="1"
+              parent="ordertech_integration.ordertech_addons_group_root_menu"
+              action="ordertech_addons_group_action"/>
+    <menuitem id="ordertech_addons_item_menu"
+              name="Items"
+              sequence="2"
+              parent="ordertech_integration.ordertech_addons_group_root_menu"
+              action="ordertech_addons_item_action"/>
+</odoo>
